@@ -1,0 +1,240 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+
+
+<?= $this->partial('partials/errores') ?>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <h1><?= 'Actividad 3: Práctica de Tecnologías Emergentes'; ?>
+        <!-- <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
+            Geolocation
+        </a>
+        <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
+            Carburante
+        </a> <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
+            Datos
+        </a>  </a> <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
+            Estaciones
+        </a>-->
+    </h1>
+
+    <div class="alert alert-info border-dark">
+        <p>Información de servicios api/rest obtenida de:</p>
+        <ul>
+            <li><a href="https://sedeaplicaciones.minetur.gob.es/ServiciosRestCarburantes/PreciosCarburantes/help"
+                   target="_blank">Catálogo
+                    de Servicios Rest Ministerio de Industria y Turismo</a></li>
+            <li><a href="https://datos.gob.es/es/catalogo/e05068001-precio-de-carburantes-en-las-gasolineras-espanolas"
+                   target="_blank">Información
+                    de Servicios web "Catálogo de carburantes en las gasolineras españolas"</a></li>
+            <li><a href="https://geoportalgasolineras.es/geoportal-instalaciones/Inicio" target="_blank">Geoportal de
+                    hidrocarburos
+                </a></li>
+        </ul>
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <button class="nav-link <?php if ($peticion == -1) echo 'active'; ?>" data-toggle="tab" id="geolocation-tab"
+                    data-target="#geolocation-tab"
+                    href="#geolocation-tab" type="button" role="tab" aria-controls="geolocation-tab"
+                    aria-selected="true">
+                Geolocation
+            </button>
+        </li>
+        <?php /* <li class="nav-item">
+            <button class="nav-link <?php if ($peticion == 1) echo 'active'; ?>" data-toggle="tab" id="carburante-tab"
+                    data-target="#carburante-tab"
+                    href="#carburante-tab" type="button" role="tab" aria-controls="carburante-tab"
+                    aria-selected="true">Productos
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link <?php if ($peticion == 2) echo 'active'; ?>" data-toggle="tab" id="datos-tab"
+                    data-target="#datos-tab"
+                    href="#datos-tab" type="button" role="tab" aria-controls="datos-tab"
+                    aria-selected="true">Datos
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link <?php if ($peticion == 3) echo 'active'; ?>" data-toggle="tab" id="estaciones-tab"
+                    data-target="#estaciones-tab"
+                    href="#estaciones-tab" type="button" role="tab" aria-controls="estaciones-tab"
+                    aria-selected="true">Estaciones
+            </button>
+        </li> */ ?>
+        <li class="nav-item">
+            <button class="nav-link" data-toggle="tab" id="peticiones-tab" data-target="#peticiones-tab"
+                    href="#peticiones-tab" type="button" role="tab" aria-controls="peticiones-tab"
+                    aria-selected="true">Peticiones
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane <?php if ($peticion == -1) echo 'active'; ?>" id="geolocation-tab">
+            <br>
+            <p class="bold">Localización con PHP</p>
+            <ul>
+                <?php foreach ($this->locationData['locationData']['Location'] as $i => $l) {
+                    echo '<li>' . $i . ': ' . $l . '</li>';
+                } ?>
+
+            </ul>
+            <hr>
+            <p class="bold">Localización con API Navegador</p>
+            <ul>
+                <li id="latitude"></li>
+                <li id="longitude"></li>
+                <li id="accuracy"></li>
+            </ul>
+        </div>
+
+        <?php /*<div class="tab-pane" id="carburante-tab">
+            carburante
+        </div>
+
+        <div class="tab-pane <?php if ($peticion == 1) echo 'active'; ?>" id="datos-tab">
+        </div>
+
+        <div class="tab-pane <?php if ($peticion == 2) echo 'active'; ?>" id="estaciones-tab">
+            Listado de Productos Petrolíferos
+        </div> */ ?>
+
+        <div class="tab-pane  <?php if ($peticion != -1) echo 'active'; ?>" id="peticiones-tab">
+
+            <form action="" name="loginForm" method="post">
+                <div class="form-outline mb-4">
+                    <br>
+                    <label class="form-label">Seleccione una petición </label>
+                    <select for="urls" class="form-control select2" aria-label="Default select example" name="url"
+                            required>
+                        <option value="" <?php if (empty($data)) echo 'selected'; ?>>Seleccione una petición
+                        </option>
+                        <?php foreach ($this->urls as $url) { ?>
+                            <option value="<?= $url['COD_URL'] ?>" <?php if (($url['COD_URL'] == $this->peticion)) echo 'selected'; ?>><?= $url['NOMBRE'] ?></option>
+                        <?php } ?>
+                    </select>
+
+                </div>
+
+                <!-- Opcional input -->
+                <!--<div class="form-outline mb-4">
+                    <label class="form-label" for="pass">Campos opcionales</label>
+                    <input type="text" name="campos" id="pass" class="form-control" disabled/>
+                </div>-->
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Enviar petición</button>
+            </form>
+        </div>
+    </div>
+
+    <?php //print_r($this->peticion); ?>
+
+    <!--Petición de las códigos de las Comunidades Autónomas-->
+    <?php if ($this->peticion == 0) {
+        if (!empty($data)) {
+            echo '<br>' . 'Listado de Comunidades:' . '<br><br>';
+            foreach ($data as $datum) {
+                echo '(' . $datum["IDCCAA"] . ') Comunidad de : ' . $datum["CCAA"] . '.<br>';
+            }
+        }
+    } else if ($this->peticion == 1) {     //Petición de las códigos de los municipios de Madrid
+        if (!empty($data)) {
+            echo '<br>' . 'Listado de Provincias:' . '<br><br>';
+            foreach ($data as $datum) {
+                echo $datum["Provincia"] . ' (' . $datum["IDPovincia"] . ')' . ' - ' . $datum["CCAA"] . ' (' . $datum["IDCCAA"] . ')' . '.<br>';
+            }
+        }
+    } else if ($this->peticion == 2) {     //Petición de las códigos de los municipios de Madrid
+        if (!empty($data)) {
+            echo '<br>Listado de Municipios:<br><br>';
+            ?>
+            <table class="table table-striped table-bordered table-hover" id="table_extensible" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Municipio</th>
+                    <th>ID Municipio</th>
+                    <th>Provincia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($data as $datum): ?>
+                    <tr>
+                        <td><?= $datum["Municipio"] ?></td>
+                        <td><?= $datum["IDMunicipio"] ?></td>
+                        <td><?= $datum["Provincia"] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php
+        }
+    } else if ($this->peticion == 3) { //Listado de productos petrolíferos
+        echo '<br>' . 'Listado de Productos Petrolíferos:' . '<br><br>';
+        if (!empty($data)) {
+            foreach ($data as $datum) {
+                //foreach ($datum as $item)
+                echo '' . $datum["IDProducto"] . ' ' . $datum["NombreProducto"] . ' ' . $datum["NombreProductoAbreviatura"] . '<br>';
+            }
+        }
+    } else if ($this->peticion == 99) {
+        if (!empty($data)) {
+            print_r($data);
+        }
+    } else if (in_array($this->peticion, [2, 3, 4, 5, 6])) {
+
+        if (is_array($data) && !empty($data)) { ?>
+            <?php foreach (array_keys($data) as $key) {
+                if (!is_array($data[$key])) { ?>
+                    <ul>
+                        <li><?= $key . ': ' . $data[$key]; ?></li>
+                    </ul>
+                <?php } else { ?>
+                    <table class="table table-striped table-bordered table-hover" id="table_extensible"
+                    style="width: 100%">
+                    <thead>
+                    <ul>
+                        <li><?= $key; ?>:</li>
+                    </ul>
+                    <tr>
+                        <?php
+                        $i = [];
+                        foreach ($data[$key] as $array_precios_municipios) {
+                            foreach ($array_precios_municipios as $key2 => $value2) {
+                                if (!in_array($key2, $i)) { ?>
+                                    <th scope="col"><?= $key2; ?></th>
+                                    <?php array_push($i, strval($key2));
+                                }
+                            }
+                        }
+                        ?>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $i2 = [];
+                    foreach ($data[$key] as $array2) {
+                        ?>
+                        <tr>
+                            <?php foreach ($array2 as $key3 => $value3) { ?>
+                                <?php // if (!in_array($key3, $i2)) { ?>
+                                <th scope="col"><?= $value3; ?></th>
+                                <?php //array_push($i, strval($key2));
+                            } ?>
+                        </tr>
+                    <?php }
+                } ?>
+
+                </tbody>
+                </table>
+            <?php }
+
+        }
+
+    } ?>
+</div>
+

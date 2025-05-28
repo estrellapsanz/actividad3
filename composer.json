@@ -1,0 +1,40 @@
+{
+  "name": "vendor/Tfe",
+  "description": "Actividad 3 Tecnologias Emergentes",
+  "type": "project",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/estrellapsanz/Tfe.git"
+    }
+  ],
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "laminas",
+    "mvc",
+    "skeleton",
+    "framework",
+    "unir",
+    "TE,TEC_EMERGENTES"
+  ],
+  "require": {
+    "php": "^8.0",
+    "laminas/laminas-component-installer": "^3.0",
+    "laminas/laminas-mvc": "^3.3.4",
+    "laminas/laminas-session": "^2.10.0",
+    "laminas/laminas-servicemanager": "^3.10.0",
+    "laminas/laminas-db": "^2.12.0",
+    "laminas/laminas-mvc-i18n": "^1.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tfe\\": "module/Tfe/src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "laminas/laminas-component-installer": true,
+      "laminas/laminas-skeleton-installer": true
+    }
+  }
+}
