@@ -1,0 +1,17 @@
+<div class="tab-pane <?php if ($peticion == -1) echo 'active'; ?>" id="geolocation-tab">
+    <br>
+    <p class="bold">Localización con PHP</p>
+    <ul>
+        <?php foreach ($location['locationData']['Location'] as $i => $l) {
+            echo '<li>' . $i . ': ' . $l . '</li>';
+        } ?>
+
+    </ul>
+    <hr>
+    <p class="bold">Localización con API Navegador</p>
+    <ul>
+        <li id="latitude"></li>
+        <li id="longitude"></li>
+        <li id="accuracy"></li>
+    </ul>
+</div>
