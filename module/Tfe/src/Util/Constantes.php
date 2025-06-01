@@ -11,6 +11,56 @@ class Constantes
 {
 
 
+    /*URL PETICIONES*/
+    const URLS_PETICIONES_API = [
+
+        //PETICIONES PARA PARTE 2
+        ["COD_URL" => 0,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/ComunidadesAutonomas/",
+            "NOMBRE" => "Comunidades Autónomas"
+        ],
+        ["COD_URL" => 1,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/Provincias/",
+            "NOMBRE" => "Provincias"
+
+        ], ["COD_URL" => 2,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/Municipios/",
+            "NOMBRE" => "Municipios"
+
+        ],
+        ["COD_URL" => 3,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/ProductosPetroliferos/",
+            "NOMBRE" => "Listado Productos petrolíferos"
+        ],
+
+        //PETICIONES PARTE 1
+        ["COD_URL" => 4,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/10",
+            "NOMBRE" => "Estaciones de Servicios Comunidad Valenciana"
+        ],
+        ["COD_URL" => 5,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/FiltroProvincia/08",
+            "NOMBRE" => "Listado de postes por Provincia (08, Barcelona) y producto (1, gasolina)"
+        ],
+        ["COD_URL" => 6,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/FiltroMunicipio/21-11-2024/4288",
+            "NOMBRE" => "Precios de estaciones de servicio para el día (12-01-2025) y el municipio Aranjuez (4288)"
+        ],
+        ["COD_URL" => 7,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroCCAA/cod_comunidad",
+            "NOMBRE" => "Estaciones de Servicios por Comunidad Autónoma"
+        ],
+        ["COD_URL" => 8,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/FiltroProvincia/cod_provincia",
+            "NOMBRE" => "Listado de postes por Provincia"
+        ],
+        ["COD_URL" => 9,
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/fecha",
+            "NOMBRE" => "Precios de las estaciones de servicio por día"
+        ]
+
+    ];
+
     /*ESTADO DE LAS OPERACIONES*/
     const ESTADO_OPERACION = 'estado_operacion';
     const ESTADO_OPERACION_OK = "operacion_ok";

@@ -1,17 +1,23 @@
-<div class="tab-pane <?php if ($peticion == -1) echo 'active'; ?>" id="geolocation-tab">
-    <br>
-    <p class="bold">Localización con PHP</p>
-    <ul>
-        <?php foreach ($location['locationData']['Location'] as $i => $l) {
-            echo '<li>' . $i . ': ' . $l . '</li>';
-        } ?>
+<div class="tab-pane  <?php if (in_array($peticion, [4, 5, 6])) echo 'active'; ?>" id="peticiones-tab">
+    <form action="" name="peticionesForm" method="post">
+        <div class="form-outline mb-4">
+            <br>
+            <label class="form-label">Seleccione una petición</label>
+            <select for="urls" class="form-control select2" aria-label="Default select example" name="url"
+                    required>
+                <option value="" <?php if (empty($data)) echo 'selected'; ?>>Seleccione una petición
+                </option>
+                <?php foreach ($this->urls as $i => $url) {
+                    if ($i > 3 && $i < 7) { ?>
+                        <option value="<?= $url['COD_URL'] ?>" <?php if (($url['COD_URL'] == $this->peticion)) echo 'selected'; ?>><?= $url['NOMBRE'] ?></option>
+                    <?php }
+                } ?>
+            </select>
 
-    </ul>
-    <hr>
-    <p class="bold">Localización con API Navegador</p>
-    <ul>
-        <li id="latitude"></li>
-        <li id="longitude"></li>
-        <li id="accuracy"></li>
-    </ul>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Enviar petición</button>
+    </form>
 </div>
+
+

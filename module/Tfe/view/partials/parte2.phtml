@@ -1,17 +1,120 @@
-<div class="tab-pane <?php if ($peticion == -1) echo 'active'; ?>" id="geolocation-tab">
+<div class="tab-pane <?php if (in_array($peticion, [7, 8, 9])) echo 'active'; ?>"
+     id="gestion-tab">
     <br>
-    <p class="bold">Localización con PHP</p>
-    <ul>
-        <?php foreach ($location['locationData']['Location'] as $i => $l) {
-            echo '<li>' . $i . ': ' . $l . '</li>';
-        } ?>
 
-    </ul>
-    <hr>
-    <p class="bold">Localización con API Navegador</p>
-    <ul>
-        <li id="latitude"></li>
-        <li id="longitude"></li>
-        <li id="accuracy"></li>
-    </ul>
+    <div class="row">
+        <br>Estaciones por CA:<br><br>
+        <div class="col-md-8">
+            <form action="" name="comunidadesForm" method="post">
+                <select class="form-control select2" aria-label="comunidades" name="comunidad">
+                    <option value="-1">Seleccione una comunidad</option>
+                    <?php foreach ($comunidades as $datum) { ?>
+                        <option name="cod_comunidad"
+                                value="<?= $datum["IDCCAA"]; ?>" <?php if ($cod_comunidad == $datum['IDCCAA']) echo 'selected'; ?>>
+                            Comunidad <?= $datum["CCAA"] ?> </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="col-md-2">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-primary btn-block mb-4">Enviar petición</button>
+            <input type="hidden" name="peticion" value=7>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <br>Postes por provincia:<br><br>
+        <div class="col-md-8">
+            <form action="" name="provinciasForm" method="post">
+
+                <select class="form-control select2" aria-label="provincias" name="cod_provincia">
+                    <option value="-1">Seleccione una provincia</option>
+                    <?php foreach ($provincias as $datum) { ?>
+                        <option name="cod_provincia"
+                                value="<?= $datum["IDPovincia"]; ?>"
+                            <?php if ($cod_municipio == $datum['IDPovincia']) echo 'selected'; ?>> <?= $datum["Provincia"] ?> </option>
+                    <?php } ?>
+                </select>
+        </div>
+        <div class="col-md-2">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-primary btn-block mb-4">Enviar petición</button>
+            <input type="hidden" name="peticion" value=8>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <br>Precios por día:<br><br>
+        <div class="col-md-8">
+            <form action="" name="preciosForm" method="post">
+                <div class="container">
+                    <input type="text" class="form-control" id="fecha" name="fecha" placeholder="dd-mm-aaaa">
+                </div>
+        </div>
+        <div class="col-md-2">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-primary btn-block mb-4">Enviar petición</button>
+            <input type="hidden" name="peticion" value=9>
+            </form>
+        </div>
+    </div>
+
+
 </div>
+
+
+<!--Petición de las códigos de las Comunidades Autónomas-->
+<?php /*if ($this->peticion == 0) {
+    if (!empty($data)) { ?>
+        <br>Listado de Comunidades:<br><br>
+        <select class="form-control select2" aria-label="comunidades">
+            <option value="-1" selected>Seleccione una comunidad</option>
+            <?php foreach ($data as $datum) { ?>
+                <option value="<?= $datum["IDCCAA"]; ?>">Comunidad <?= $datum["CCAA"] ?> </option>;
+            <?php } ?>
+        </select>
+    <?php }
+} else */
+if (0 && $this->peticion == 1) {     //Petición de las códigos de los municipios de Madrid
+    if (!empty($data)) {
+        echo '<br>' . 'Listado de Provincias:' . '<br><br>';
+        foreach ($data as $datum) {
+            echo $datum["Provincia"] . ' (' . $datum["IDPovincia"] . ')' . ' - ' . $datum["CCAA"] . ' (' . $datum["IDCCAA"] . ')' . '.<br>';
+        }
+    }
+} else if (0 && $this->peticion == 2) {     //Petición de las códigos de los municipios de Madrid
+    if (!empty($data)) {
+        echo '<br>Listado de Municipios:<br><br>';
+        ?>
+        <table class="table table-striped table-bordered table-hover" id="table_extensible" style="width: 100%">
+            <thead>
+            <tr>
+                <th>Municipio</th>
+                <th>ID Municipio</th>
+                <th>Provincia</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($data as $datum): ?>
+                <tr>
+                    <td><?= $datum["Municipio"] ?></td>
+                    <td><?= $datum["IDMunicipio"] ?></td>
+                    <td><?= $datum["Provincia"] ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php
+    }
+} else if (0 && $this->peticion == 3) { //Listado de productos petrolíferos
+    echo '<br>' . 'Listado de Productos Petrolíferos:' . '<br><br>';
+    if (!empty($data)) {
+        foreach ($data as $datum) {
+            //foreach ($datum as $item)
+            echo '' . $datum["IDProducto"] . ' ' . $datum["NombreProducto"] . ' ' . $datum["NombreProductoAbreviatura"] . '<br>';
+        }
+    }
+} ?>

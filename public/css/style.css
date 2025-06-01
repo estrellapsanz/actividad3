@@ -10,6 +10,9 @@ body {
     padding-top: 2.5rem;
 }
 
+.container {
+    max-width: 90%;
+}
 
 /*BARRA DE NAVEGACION*/
 .navbar {

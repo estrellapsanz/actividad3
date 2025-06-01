@@ -16,14 +16,27 @@ $(document).ready(function () {
 
     })
 
+    $('button.nav-link').on('click', function (event) {
+        event.preventDefault();
+        let tab = $(this).attr('id');
+        let tabla_cargada = $('#tabla-cargada').length > 0;
+
+        if (tab == 'geolocation-tab') {
+
+        } else if (tab == 'peticiones-tab') {
+
+        } else if (tab == 'gestion-tab') {
+        }
+
+        //document.getElementById('resetear_peticion').value = -1;
+        //document.getElementById('resetear').submit();
+        //console.log($('table'));
+        //$('table', 'p', 'ul').remove();
+
+    })
+
 
 });
-
-//inicialización de los tooltip de Booststrap
-//var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-//var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-//    return new bootstrap.Tooltip(tooltipTriggerEl);
-//})
 
 
 if ("geolocation" in navigator) {

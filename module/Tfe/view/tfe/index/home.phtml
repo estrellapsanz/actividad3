@@ -8,16 +8,6 @@
 <?= $this->partial('partials/errores') ?>
 <div class="p-5 mb-4 bg-light rounded-3">
     <h1><?= 'Actividad 3: Práctica de Tecnologías Emergentes'; ?>
-        <!-- <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
-            Geolocation
-        </a>
-        <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
-            Carburante
-        </a> <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
-            Datos
-        </a>  </a> <a class="btn btn-primary btn-lg" href="<? //= $this->Url('principal') ?>">
-            Estaciones
-        </a>-->
     </h1>
 
     <div class="alert alert-info border-dark">
@@ -44,150 +34,48 @@
                 Geolocation
             </button>
         </li>
-        <?php /* <li class="nav-item">
-            <button class="nav-link <?php if ($peticion == 1) echo 'active'; ?>" data-toggle="tab" id="carburante-tab"
-                    data-target="#carburante-tab"
-                    href="#carburante-tab" type="button" role="tab" aria-controls="carburante-tab"
-                    aria-selected="true">Productos
-            </button>
-        </li>
+
         <li class="nav-item">
-            <button class="nav-link <?php if ($peticion == 2) echo 'active'; ?>" data-toggle="tab" id="datos-tab"
-                    data-target="#datos-tab"
-                    href="#datos-tab" type="button" role="tab" aria-controls="datos-tab"
-                    aria-selected="true">Datos
-            </button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link <?php if ($peticion == 3) echo 'active'; ?>" data-toggle="tab" id="estaciones-tab"
-                    data-target="#estaciones-tab"
-                    href="#estaciones-tab" type="button" role="tab" aria-controls="estaciones-tab"
-                    aria-selected="true">Estaciones
-            </button>
-        </li> */ ?>
-        <li class="nav-item">
-            <button class="nav-link" data-toggle="tab" id="peticiones-tab" data-target="#peticiones-tab"
+            <button class="nav-link" <?php if (in_array($peticion, [4, 5, 6])) echo 'active'; ?> data-toggle="tab"
+                    id="peticiones-tab" data-target="#peticiones-tab"
                     href="#peticiones-tab" type="button" role="tab" aria-controls="peticiones-tab"
-                    aria-selected="true">Peticiones
+                    aria-selected="true">Peticiones (parte 1)
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link" <?php if (in_array($peticion, [0, 1, 2, 3])) echo 'active'; ?> data-toggle="tab"
+                    id="gestion-tab" data-target="#gestion-tab"
+                    href="#gestion-tab" type="button" role="tab" aria-controls="gestion-tab"
+                    aria-selected="true">Gestión datos portal (parte 2)
             </button>
         </li>
     </ul>
 
+
     <div class="tab-content">
-        <div class="tab-pane <?php if ($peticion == -1) echo 'active'; ?>" id="geolocation-tab">
-            <br>
-            <p class="bold">Localización con PHP</p>
-            <ul>
-                <?php foreach ($this->locationData['locationData']['Location'] as $i => $l) {
-                    echo '<li>' . $i . ': ' . $l . '</li>';
-                } ?>
 
-            </ul>
-            <hr>
-            <p class="bold">Localización con API Navegador</p>
-            <ul>
-                <li id="latitude"></li>
-                <li id="longitude"></li>
-                <li id="accuracy"></li>
-            </ul>
-        </div>
+        <!--geolocation-->
+        <?= $this->partial('partials/geolocation', ['peticion' => $peticion, 'location' => $locationData]) ?>
 
-        <?php /*<div class="tab-pane" id="carburante-tab">
-            carburante
-        </div>
+        <!--peticiones parte 1: valencia, aranjuez etc (peticiones en array urls códigos 4-5-6-->
+        <?= $this->partial('partials/parte1', ['peticion' => $peticion, 'urls' => $urls, 'data' => $data]); ?>
 
-        <div class="tab-pane <?php if ($peticion == 1) echo 'active'; ?>" id="datos-tab">
-        </div>
+        <!--peticiones parte 2:  (peticiones en array urls códigos 0-1-2-3-->
+        <?= $this->partial('partials/parte2',
+            ['peticion' => $peticion,
+                'urls' => $urls, 'data' => $data,
+                'comunidades' => $comunidades,
+                'provincias' => $provincias,
+                'cod_comunidad' => $cod_comunidad,
+                'cod_municipio' => $cod_municipio,
+                'fecha' => $id_fecha
+            ]
+        ); ?>
 
-        <div class="tab-pane <?php if ($peticion == 2) echo 'active'; ?>" id="estaciones-tab">
-            Listado de Productos Petrolíferos
-        </div> */ ?>
 
-        <div class="tab-pane  <?php if ($peticion != -1) echo 'active'; ?>" id="peticiones-tab">
-
-            <form action="" name="loginForm" method="post">
-                <div class="form-outline mb-4">
-                    <br>
-                    <label class="form-label">Seleccione una petición </label>
-                    <select for="urls" class="form-control select2" aria-label="Default select example" name="url"
-                            required>
-                        <option value="" <?php if (empty($data)) echo 'selected'; ?>>Seleccione una petición
-                        </option>
-                        <?php foreach ($this->urls as $url) { ?>
-                            <option value="<?= $url['COD_URL'] ?>" <?php if (($url['COD_URL'] == $this->peticion)) echo 'selected'; ?>><?= $url['NOMBRE'] ?></option>
-                        <?php } ?>
-                    </select>
-
-                </div>
-
-                <!-- Opcional input -->
-                <!--<div class="form-outline mb-4">
-                    <label class="form-label" for="pass">Campos opcionales</label>
-                    <input type="text" name="campos" id="pass" class="form-control" disabled/>
-                </div>-->
-
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Enviar petición</button>
-            </form>
-        </div>
-    </div>
-
-    <?php //print_r($this->peticion); ?>
-
-    <!--Petición de las códigos de las Comunidades Autónomas-->
-    <?php if ($this->peticion == 0) {
-        if (!empty($data)) {
-            echo '<br>' . 'Listado de Comunidades:' . '<br><br>';
-            foreach ($data as $datum) {
-                echo '(' . $datum["IDCCAA"] . ') Comunidad de : ' . $datum["CCAA"] . '.<br>';
-            }
-        }
-    } else if ($this->peticion == 1) {     //Petición de las códigos de los municipios de Madrid
-        if (!empty($data)) {
-            echo '<br>' . 'Listado de Provincias:' . '<br><br>';
-            foreach ($data as $datum) {
-                echo $datum["Provincia"] . ' (' . $datum["IDPovincia"] . ')' . ' - ' . $datum["CCAA"] . ' (' . $datum["IDCCAA"] . ')' . '.<br>';
-            }
-        }
-    } else if ($this->peticion == 2) {     //Petición de las códigos de los municipios de Madrid
-        if (!empty($data)) {
-            echo '<br>Listado de Municipios:<br><br>';
-            ?>
-            <table class="table table-striped table-bordered table-hover" id="table_extensible" style="width: 100%">
-                <thead>
-                <tr>
-                    <th>Municipio</th>
-                    <th>ID Municipio</th>
-                    <th>Provincia</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($data as $datum): ?>
-                    <tr>
-                        <td><?= $datum["Municipio"] ?></td>
-                        <td><?= $datum["IDMunicipio"] ?></td>
-                        <td><?= $datum["Provincia"] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-            <?php
-        }
-    } else if ($this->peticion == 3) { //Listado de productos petrolíferos
-        echo '<br>' . 'Listado de Productos Petrolíferos:' . '<br><br>';
-        if (!empty($data)) {
-            foreach ($data as $datum) {
-                //foreach ($datum as $item)
-                echo '' . $datum["IDProducto"] . ' ' . $datum["NombreProducto"] . ' ' . $datum["NombreProductoAbreviatura"] . '<br>';
-            }
-        }
-    } else if ($this->peticion == 99) {
-        if (!empty($data)) {
-            print_r($data);
-        }
-    } else if (in_array($this->peticion, [2, 3, 4, 5, 6])) {
-
-        if (is_array($data) && !empty($data)) { ?>
+        <!-- tabla genérica-->
+        <?php if (is_array($data) && !empty($data)) { ?>
             <?php foreach (array_keys($data) as $key) {
                 if (!is_array($data[$key])) { ?>
                     <ul>
@@ -228,13 +116,19 @@
                         </tr>
                     <?php }
                 } ?>
-
                 </tbody>
                 </table>
             <?php }
+        } ?>
 
-        }
-
-    } ?>
+    </div>
 </div>
+
+
+<!-- Formulario"resetear" -->
+<form id="resetear" name="resetear" action="" method="post">
+    <input type="hidden" id="resetear_peticion" name="peticion" value="-1">
+</form>
+
+
 
