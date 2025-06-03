@@ -39,11 +39,11 @@ class Constantes
             "NOMBRE" => "Estaciones de Servicios Comunidad Valenciana"
         ],
         ["COD_URL" => 5,
-            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/FiltroProvincia/08",
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/FiltroCCAAProducto/08/1",
             "NOMBRE" => "Listado de postes por Provincia (08, Barcelona) y producto (1, gasolina)"
         ],
         ["COD_URL" => 6,
-            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/FiltroMunicipio/21-11-2024/4288",
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/FiltroMunicipio/12-01-2025/4288",
             "NOMBRE" => "Precios de estaciones de servicio para el día (12-01-2025) y el municipio Aranjuez (4288)"
         ],
         ["COD_URL" => 7,

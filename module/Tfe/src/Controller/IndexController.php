@@ -81,10 +81,10 @@ class IndexController extends MasterController
                     $data = json_decode($response, true);
 
                     // Mostrar respuesta
-                    /*echo "<pre>";
+                    echo "<pre>";
                     print_r($data);
                     echo "</pre>";
-                    die;*/
+                    die;
 
                 }
 
