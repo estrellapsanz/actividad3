@@ -39,7 +39,7 @@ class Constantes
             "NOMBRE" => "Estaciones de Servicios Comunidad Valenciana"
         ],
         ["COD_URL" => 5,
-            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/FiltroCCAAProducto/08/1",
+            "URL" => "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/PostesMaritimos/FiltroProvinciaProducto/8/1",
             "NOMBRE" => "Listado de postes por Provincia (08, Barcelona) y producto (1, gasolina)"
         ],
         ["COD_URL" => 6,
